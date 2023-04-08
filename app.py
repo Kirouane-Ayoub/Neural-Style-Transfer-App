@@ -16,7 +16,7 @@ with st.sidebar :
 tab0 , tab1 = st.tabs(["Home" , "Style Transfer"])
 with tab0 : 
     st.header("About This Project : ")
-    st.image("Home.jpeg")
+    st.image("homeimg/Home.jpeg")
     st.write("""Neural Style Transfer App is an innovative technology that allows users to transform their photos into unique artistic creations.
         Using deep neural networks, this app can apply the style of one image to the content of another,
         resulting in a beautiful fusion of two distinct visual styles. Whether you want to turn a family photo into a work of art or 
@@ -28,10 +28,12 @@ with tab1 :
         content = st.file_uploader("Uploade Your Contant image : " , type=["png" ,"jpg" , "jpeg"])
         if content : 
             contant_img_name = content.name
+            st.image(contant_img_name , width=350 , caption="The original image")
     with col2 : 
         style = st.file_uploader("Uploade Your Style image : " , type=["png" ,"jpg" , "jpeg"])
         if style : 
             style_img_name = style.name
+            st.image(style_img_name , width=350 , caption="The Style image")
 
     _ , c1 , c2 , c3 , c4= st.columns(5)
     with st.spinner('Wait for it...'):
@@ -41,7 +43,7 @@ with tab1 :
         if start : 
             try : 
                 stylized_image = NST.transfer(contant_img_name , style_img_name)
-                st.image(np.squeeze(stylized_image))
+                st.image(np.squeeze(stylized_image) , caption="The Stylized Image")
             except : 
                 pass
             if results_save : 
